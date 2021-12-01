@@ -12,7 +12,7 @@ const LoginScreen = () => {
 
     const [ formValues, handleInputChange ] = useForm({
         email: 'user@example.com',
-        password: '123456'
+        password: '123123'
     });
 
     const { email, password } = formValues;
@@ -29,7 +29,10 @@ const LoginScreen = () => {
     return (
         <>
             <h3 className="auth__title">Login</h3>   
-            <form onSubmit={ handleLogin }>
+            <form
+                onSubmit={ handleLogin }
+                className="animate__animated animate_fadeIn animate__faster"
+            >
                 <input
                     type="text"
                     placeholder="Email"

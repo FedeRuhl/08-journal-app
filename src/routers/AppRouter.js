@@ -7,6 +7,7 @@ import {
     Redirect
   } from "react-router-dom";
 import { login } from '../actions/auth';
+import { startLoadingNotes } from '../actions/notes';
 import JournalScreen from '../components/journal/JournalScreen';
 import AuthRouter from './AuthRouter';
 import PrivateRoute from './PrivateRoute';
@@ -21,10 +22,12 @@ const AppRouter = () => {
 
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
                 setIsLoggedIn(true);
+
+                dispatch(startLoadingNotes(user.uid));
             }
             else {
                 setIsLoggedIn(false);
